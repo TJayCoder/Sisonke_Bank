@@ -83,7 +83,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             @Override
             public void onClick(View v) {
 
-                double Amount=Double.parseDouble(amount.getText().toString().trim());
+               int Amount=Integer.parseInt(amount.getText().toString().trim());
                 String Choice=spin.getSelectedItem().toString();
 
                 int sav=0,cur=0;
