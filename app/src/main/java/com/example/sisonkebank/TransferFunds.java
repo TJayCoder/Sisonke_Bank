@@ -19,6 +19,7 @@ import java.sql.SQLOutput;
 
 public class TransferFunds extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
 
+    //Declaring Widgets
     Toolbar toolbar;
     TextView userAccountData;
     EditText amount;
@@ -28,7 +29,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
     Spinner spin;
 
 
-
+    //declaring Variables
     String[] AccountType = {"Savings to Current","Current to Savings"};
     public String Email;
     Cursor cursor;
@@ -40,35 +41,39 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer_funds);
 
+        //instance of Toolbar
         toolbar=findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //instance of widgets
         userAccountData=findViewById(R.id.tvUserData);
-
-
         transfer=findViewById(R.id.btnTransferFunds);
         amount=findViewById(R.id.etAmount);
 
+
+        //instance of databaseHelper
         databaseHelper = new DatabaseHelper(TransferFunds.this);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
 
-        //Creating the ArrayAdapter instance having the country list
+        //Creating the ArrayAdapter instance having the transfer options
         ArrayAdapter list = new ArrayAdapter(this,android.R.layout.simple_spinner_item,AccountType);
         list .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(list );
 
 
-        //Receiving Intent from the Login Activity
-
+        //Passing Intent of user Email from the Login Activity
         Email= getIntent().getStringExtra("UserEmail");
          cursor = databaseHelper.getUserDetails(Email);
 
          stringBuilder = new StringBuilder();
 
+         //Retrieving User current balance and Savings Account balance from the database
         while (cursor.moveToNext()) {
 
             final StringBuilder append = stringBuilder.append("Current Account Balance: " + cursor.getString(6) +"\n\n");
@@ -76,6 +81,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             final StringBuilder append2 =stringBuilder.append("  Savings Account Balance: " + cursor.getString(7));
         }
 
+        //setting value to  a textview
         userAccountData.setText(stringBuilder);
 
 
@@ -87,12 +93,12 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             @Override
             public void onClick(View v) {
 
-               int Amount=Integer.parseInt(amount.getText().toString().trim());
+               double Amount=Double.parseDouble( amount.getText().toString().trim());
                Choice=spin.getSelectedItem().toString();
 
                 Cursor cursor=databaseHelper.getUserDetails(Email);
 
-
+                // getting user balance and current balance
                 while(cursor.moveToNext()){
                  String savings=cursor.getString(6);
                 String current=cursor.getString(7);
@@ -102,17 +108,19 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
                         double NewBalanceSav=0;
                         double NewBalanceCurrent=0;
 
+                        //check if the user selected Saving to Current or Current to Savings from the Spinner
                         if(Choice=="Savings to Current") {
 
 
-
+                            // calculate based on the user's choice
                              NewBalanceSav=Integer.parseInt( savings)-Amount;
                              NewBalanceCurrent=Integer.parseInt(current)+Amount;
 
 
-
+                            //setting calculated values to  a textview
                              userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
 
+                             //passing the calculated values to update the database with new values
                             boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
                             if (b == true) {
 
@@ -124,12 +132,14 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
 
                         }else{
 
+                            // calculate based on the user's choice
                               NewBalanceSav=Integer.parseInt( savings)+Amount;
                                NewBalanceCurrent=Integer.parseInt(current)-Amount;
 
-
+                            //setting calculated values to  a textview
                              userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
 
+                            //passing the calculated values to update the database with new values
                             boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
                             if (b == true) {
                                 Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
@@ -166,21 +176,6 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        if(position==1){
-
-
-
-          //   Toast.makeText(getApplicationContext(),AccountType[position] , Toast.LENGTH_LONG).show();
-
-
-
-        }else
-            {
-               //  Toast.makeText(getApplicationContext(),AccountType[position] , Toast.LENGTH_LONG).show();
-
-
-        }
 
     }
 

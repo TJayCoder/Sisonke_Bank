@@ -38,7 +38,7 @@ public class ViewBalance extends AppCompatActivity {
             while (cursor.moveToNext()) {
 
 
-              //Retrieve the Name from the database
+              //Retrieve the following values from the database
             stringBuilder.append("Account Holder Name: "+ cursor.getString(0)+" " +
                     "\n  \nAccount Holder Surname: "+ cursor.getString(1)+
                     " \n \nCurrent Account Balance: "+ cursor.getString(6)+
@@ -46,7 +46,7 @@ public class ViewBalance extends AppCompatActivity {
 
             //
             }
-
+            //setting retrieved values to a textView
             UserData.setText(stringBuilder);
 
 
