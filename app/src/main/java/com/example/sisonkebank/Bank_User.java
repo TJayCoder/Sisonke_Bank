@@ -3,14 +3,16 @@ package com.example.sisonkebank;
 
 import java.io.Serializable;
 
-public class Bank_User  {
+public class Bank_User implements Serializable {
 
     //Declaring Variables
     String First_Name,Surname,Email,Password,Mobile_Number,Gender;
-   public  String NewBalanceSavings;
-    public String NewBalanceCurrent;
+    public double Savings_Balance = 1000.0;
+    public double Current_Balance = 1000.0;
 
     //constructor
+
+
     public Bank_User(String first_Name, String surname, String email, String password, String mobile_Number, String gender) {
         First_Name = first_Name;
         Surname = surname;
@@ -90,21 +92,20 @@ public class Bank_User  {
     //------------------------------------------is used to pass the value to be transferred
 
 
-    public String getNewBalanceSavings() {
-        return NewBalanceSavings;
+    public double getSavings_Balance() {
+        return Savings_Balance;
     }
 
-    public void setNewBalanceSavings(String newBalanceSavings) {
-        NewBalanceSavings = newBalanceSavings;
+    public void setSavings_Balance(double savings_Balance) {
+        Savings_Balance = savings_Balance;
     }
 
-    public String getNewBalanceCurrent() {
-        return NewBalanceCurrent;
+    public double getCurrent_Balance() {
+        return Current_Balance;
     }
 
-    public void setNewBalanceCurrent(String newBalanceCurrent) {
-        NewBalanceCurrent = newBalanceCurrent;
+    public void setCurrent_Balance(double current_Balance) {
+        Current_Balance = current_Balance;
     }
 }
-
 

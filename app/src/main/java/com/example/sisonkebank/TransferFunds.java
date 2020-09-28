@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,10 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
+
 public class TransferFunds extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
 
     Toolbar toolbar;
-    TextView userAccountInfor;
+    TextView userAccountData;
     EditText amount;
     Button transfer;
     DatabaseHelper databaseHelper;
@@ -25,11 +28,12 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
     Spinner spin;
 
 
+
     String[] AccountType = {"Savings to Current","Current to Savings"};
     public String Email;
     Cursor cursor;
-    StringBuilder stringBuilder ,stringBuilder2;
-
+    StringBuilder stringBuilder;
+    String Choice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
         toolbar=findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        userAccountInfor=findViewById(R.id.tvUserData);
+        userAccountData=findViewById(R.id.tvUserData);
 
 
         transfer=findViewById(R.id.btnTransferFunds);
@@ -72,7 +76,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             final StringBuilder append2 =stringBuilder.append("  Savings Account Balance: " + cursor.getString(7));
         }
 
-        userAccountInfor.setText(stringBuilder);
+        userAccountData.setText(stringBuilder);
 
 
 
@@ -84,43 +88,77 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             public void onClick(View v) {
 
                int Amount=Integer.parseInt(amount.getText().toString().trim());
-                String Choice=spin.getSelectedItem().toString();
+               Choice=spin.getSelectedItem().toString();
 
-                int sav=0,cur=0;
-                int NewBalanceSav=0,NewBalanceCurrent=0;
-
-
-                if(Choice=="Savings to Current"){
-
-                    //calculation from saving to current account
-                   NewBalanceSav= (int) (sav+Amount);
-                    NewBalanceCurrent= (int) (sav-Amount);
+                Cursor cursor=databaseHelper.getUserDetails(Email);
 
 
-                    boolean b =databaseHelper.updateBalance(NewBalanceSav,NewBalanceCurrent,Email);
-                    if(b==true){
-                        Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
-                    }
-
-                }else {
-
-                    //calculation from  current to saving  account
-                    NewBalanceSav= (int) (sav-Amount);
-                    NewBalanceCurrent= (int) (sav+Amount);
+                while(cursor.moveToNext()){
+                 String savings=cursor.getString(6);
+                String current=cursor.getString(7);
 
 
-                    boolean b =   databaseHelper.updateBalance(NewBalanceSav,NewBalanceCurrent,Email);
-                    if(b==true){
-                        Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                    try {
+                        double NewBalanceSav=0;
+                        double NewBalanceCurrent=0;
+
+                        if(Choice=="Savings to Current") {
+
+
+
+                             NewBalanceSav=Integer.parseInt( savings)-Amount;
+                             NewBalanceCurrent=Integer.parseInt(current)+Amount;
+
+
+
+                             userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
+
+                            boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
+                            if (b == true) {
+
+                                Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }else{
+
+                              NewBalanceSav=Integer.parseInt( savings)+Amount;
+                               NewBalanceCurrent=Integer.parseInt(current)-Amount;
+
+
+                             userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
+
+                            boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
+                            if (b == true) {
+                                Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+
+
+                    }catch(NullPointerException e){
+
+                        System.out.println(e.getMessage());
+
                     }
 
                 }
 
+
+
+
+
+
+
+
+
             }
+
         });
 
     }

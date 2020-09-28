@@ -23,8 +23,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //initializing the values
 
 
-    public int Savings_Balance = 1000;
-    public int Current_Balance = 1000;
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -59,8 +57,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(col_4, bank_user.getPassword());
         cv.put(col_5, bank_user.getMobile_Number());
         cv.put(col_6, bank_user.isGender());
-        cv.put(col_7, Savings_Balance);
-        cv.put(col_8, Current_Balance);
+        cv.put(col_7,bank_user.getSavings_Balance());
+        cv.put(col_8,bank_user.getCurrent_Balance());
         long insert = db.insert(Table_Name, null, cv);
 
         if (insert == -1) {
@@ -99,28 +97,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //update user balance
-    public boolean updateBalance(int NewBalanceSav, int NewBalanceCurrent, String Email) {
-
+    public boolean updateBalance(Double NewCurrentBalance,Double NewSavingsBalance ,String Email)
+    {
         SQLiteDatabase db = DatabaseHelper.this.getReadableDatabase();
 
-
+        Bank_User bank_user=new Bank_User();
 
         ContentValues cv = new ContentValues();
 
-        cv.put("Current_Balance", NewBalanceCurrent);
-        cv.put("Savings_Balance", NewBalanceSav);
+        cv.put("Current_Balance",NewCurrentBalance);
+        cv.put("Savings_Balance",NewSavingsBalance);
 
         int update = db.update(Table_Name, cv, "Email = ?", new String[]{Email});
-        if (update == 1) {
+        if(update==1){
             return true;
 
-        } else {
+        }else{
             return false;
         }
-
-
-
-
 
     }
 
