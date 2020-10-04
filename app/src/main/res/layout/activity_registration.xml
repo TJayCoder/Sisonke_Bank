@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/background_light"
     tools:context=".Registration">
-
 
 
     <include layout="@layout/appbar" />
@@ -14,8 +14,9 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:paddingTop="40dp"
         android:text="Enter your details below to register"
         android:textAlignment="center"
@@ -25,8 +26,11 @@
 
     <EditText
         android:id="@+id/etName"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
@@ -34,8 +38,11 @@
 
     <EditText
         android:id="@+id/etLastName"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
@@ -43,8 +50,11 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
@@ -52,8 +62,11 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -61,8 +74,11 @@
 
     <EditText
         android:id="@+id/etNumber"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="Mobile"
         android:inputType="textPersonName"
@@ -70,8 +86,11 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
@@ -81,6 +100,7 @@
             android:id="@+id/radioGroupGender"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="2"
             android:orientation="horizontal">
 
@@ -88,6 +108,7 @@
                 android:id="@+id/tvGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="2"
                 android:text="Gender"
                 android:textAlignment="center" />
@@ -96,6 +117,7 @@
                 android:id="@+id/radioFemale"
                 android:layout_width="104dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="2"
                 android:text="Female" />
 
@@ -103,6 +125,7 @@
                 android:id="@+id/radioMale"
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="2"
                 android:text="Male" />
         </RadioGroup>
@@ -111,17 +134,20 @@
 
     <Button
         android:id="@+id/btnCreateAccount"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="@color/colorAccent"
         android:text="Create Account" />
 
     <TextView
         android:id="@+id/tvReturnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:paddingTop="20dp"
         android:text="Already Have Account? Login Here."
         android:textAlignment="center" />

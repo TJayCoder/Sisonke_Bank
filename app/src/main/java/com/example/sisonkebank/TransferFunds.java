@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.service.autofill.UserData;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,7 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
 
 
     //declaring Variables
-    String[] AccountType = {"Savings to Current","Current to Savings"};
+    String[] AccountType = {"Current to Savings","Savings to Current"};
     public String Email;
     Cursor cursor;
     StringBuilder stringBuilder;
@@ -51,6 +52,9 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
         transfer=findViewById(R.id.btnTransferFunds);
         amount=findViewById(R.id.etAmount);
 
+
+        // this editText will only take numbers
+        amount.setKeyListener(DigitsKeyListener.getInstance("1234567890"));
 
         //instance of databaseHelper
         databaseHelper = new DatabaseHelper(TransferFunds.this);
@@ -93,79 +97,100 @@ public class TransferFunds extends AppCompatActivity implements  AdapterView.OnI
             @Override
             public void onClick(View v) {
 
-               double Amount=Double.parseDouble( amount.getText().toString().trim());
-               Choice=spin.getSelectedItem().toString();
+                String Amount =amount.getText().toString().trim();
 
-                Cursor cursor=databaseHelper.getUserDetails(Email);
-
-                // getting user balance and current balance
-                while(cursor.moveToNext()){
-                 String savings=cursor.getString(6);
-                String current=cursor.getString(7);
+                Choice = spin.getSelectedItem().toString();
 
 
-                    try {
-                        double NewBalanceSav=0;
-                        double NewBalanceCurrent=0;
 
-                        //check if the user selected Saving to Current or Current to Savings from the Spinner
-                        if(Choice=="Savings to Current") {
+                    if (Amount.isEmpty()) {
+
+                        Toast.makeText(TransferFunds.this, "Enter the Amount to be Transferred", Toast.LENGTH_SHORT).show();
 
 
-                            // calculate based on the user's choice
-                             NewBalanceSav=Integer.parseInt( savings)-Amount;
-                             NewBalanceCurrent=Integer.parseInt(current)+Amount;
+                    }
+                    else {
+                        Cursor cursor = databaseHelper.getUserDetails(Email);
+
+                        // getting user balance and current balance
+                        while (cursor.moveToNext()) {
+                            String savings = cursor.getString(6);
+                            String current = cursor.getString(7);
 
 
-                            //setting calculated values to  a textview
-                             userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
+                            try {
 
-                             //passing the calculated values to update the database with new values
-                            boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
-                            if (b == true) {
 
-                                Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
+                                double NewBalanceSav = 0;
+                                double NewBalanceCurrent = 0;
 
-                            } else {
-                                Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                                //check if the user selected Saving to Current or Current to Savings from the Spinner
+                                if (Choice == "Savings to Current") {
+
+                                    // check if the Savings account has enough cash to transfer
+                                    if (Integer.parseInt( savings)==0 ) {
+
+                                        Toast.makeText(TransferFunds.this, "Insufficient funds !!", Toast.LENGTH_SHORT).show();
+
+                                    }else{
+
+
+
+                                    // calculate based on the user's choice
+                                    NewBalanceSav = Integer.parseInt(savings) - Double.parseDouble(Amount);
+                                    NewBalanceCurrent = Integer.parseInt(current) + Double.parseDouble(Amount);
+
+
+                                    //setting calculated values to  a textview
+                                    userAccountData.setText("Current Account Balance: " + NewBalanceCurrent + "\n\n" + "  Savings Account Balance: " + NewBalanceSav);
+
+                                    //passing the calculated values to update the database with new values
+                                    boolean b = databaseHelper.updateBalance(NewBalanceCurrent, NewBalanceSav, Email);
+                                    if (b == true) {
+
+                                        Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                                } else {
+
+
+                                    //check if the Current account has enough cash to transfer
+                                    if (Integer.parseInt( current)==0) {
+
+                                        Toast.makeText(TransferFunds.this, "Insufficient funds !!", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        // calculate based on the user's choice
+                                        NewBalanceSav = Integer.parseInt(savings) + Double.parseDouble(Amount);
+                                        NewBalanceCurrent = Integer.parseInt(current) - Double.parseDouble(Amount);
+
+                                        //setting calculated values to  a textview
+                                        userAccountData.setText("Current Account Balance: " + NewBalanceCurrent + "\n\n" + "  Savings Account Balance: " + NewBalanceSav);
+
+                                        //passing the calculated values to update the database with new values
+                                        boolean b = databaseHelper.updateBalance(NewBalanceCurrent, NewBalanceSav, Email);
+                                        if (b == true) {
+                                            Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                            } catch (NullPointerException e) {
+
+                                System.out.println(e.getMessage());
+
                             }
 
-                        }else{
-
-                            // calculate based on the user's choice
-                              NewBalanceSav=Integer.parseInt( savings)+Amount;
-                               NewBalanceCurrent=Integer.parseInt(current)-Amount;
-
-                            //setting calculated values to  a textview
-                             userAccountData.setText("Current Account Balance: " + NewBalanceCurrent   +"\n\n"+    "  Savings Account Balance: " + NewBalanceSav);
-
-                            //passing the calculated values to update the database with new values
-                            boolean b = databaseHelper.updateBalance(NewBalanceCurrent,NewBalanceSav, Email);
-                            if (b == true) {
-                                Toast.makeText(TransferFunds.this, "Amount Transferred", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(TransferFunds.this, "Error!!", Toast.LENGTH_SHORT).show();
-                            }
                         }
 
 
-
-
-                    }catch(NullPointerException e){
-
-                        System.out.println(e.getMessage());
-
                     }
-
-                }
-
-
-
-
-
-
-
-
 
             }
 

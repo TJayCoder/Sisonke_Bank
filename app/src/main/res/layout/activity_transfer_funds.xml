@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/background_light"
     tools:context=".TransferFunds">
 
     <include layout="@layout/appbar" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:text="Transfer to/from Accounts"
@@ -24,15 +26,17 @@
 
     <TextView
         android:id="@+id/tvUserData"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="UserData"
         android:textAlignment="center"
         android:textSize="18sp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
@@ -41,6 +45,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Enter Transfer Amount: R"
             android:textAlignment="center"
@@ -50,21 +55,25 @@
             android:id="@+id/etAmount"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="number|textPersonName" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Transfer from:"
             android:textAlignment="center"
@@ -74,6 +83,7 @@
             android:id="@+id/spinner"
             android:layout_width="215dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1" />
 
 
@@ -81,8 +91,9 @@
 
     <Button
         android:id="@+id/btnTransferFunds"
-        android:layout_width="match_parent"
+        android:layout_width="341dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:background="@color/colorAccent"

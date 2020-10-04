@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/background_light"
     tools:context=".MainPage">
 
 
@@ -12,8 +13,12 @@
 
     <TextView
         android:id="@+id/tvWelcomMessage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:paddingTop="40dp"
         android:paddingBottom="20dp"
         android:text="Welcome Name"
@@ -24,25 +29,31 @@
 
     <Button
         android:id="@+id/btnAccountBalance"
-        android:layout_width="match_parent"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:background="@color/colorAccent"
+        android:gravity="center"
         android:text="VIEW ACCOUNT BALANCE" />
 
     <Button
         android:id="@+id/btnTransfer"
-        android:layout_width="match_parent"
+        android:layout_width="349dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:background="@color/colorAccent"
+        android:gravity="center"
         android:text="TRANSFER BETWEEN ACCOUNT" />
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
+        android:layout_width="354dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:background="@color/colorAccent"
+        android:gravity="center"
         android:text="LOGOUT" />
 </LinearLayout>

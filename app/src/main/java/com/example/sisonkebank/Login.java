@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity {
                 else
                     {
 
-                    Toast.makeText(Login.this, "Incorrect Login details either EMAIL OR PASSWORD!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Incorrect Login details. Please try Again!!", Toast.LENGTH_SHORT).show();
 
                     }
             }

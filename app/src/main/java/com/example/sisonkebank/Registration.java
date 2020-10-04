@@ -65,6 +65,8 @@ public class Registration extends AppCompatActivity {
                 gender= findViewById(selectedId);
 
                String Gender=gender.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String MobilePattern = "[0-9]{10}";
 
                     if(  Name.isEmpty())
                     {
@@ -81,18 +83,25 @@ public class Registration extends AppCompatActivity {
                     {
                         Toast.makeText(Registration.this, "Email Is Required", Toast.LENGTH_SHORT).show();
 
+                    }else if(!Email.matches(emailPattern)){
+                        Toast.makeText(Registration.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+
                     }
                      else if(  Password.isEmpty())
                     {
                         Toast.makeText(Registration.this, "Password Is Required", Toast.LENGTH_SHORT).show();
 
+                    }else if(Password.length()<5){
+                        Toast.makeText(Registration.this, "Password should contain five character or more. Try again", Toast.LENGTH_SHORT).show();
                     }
 
 
                     else if(  MobileNo.isEmpty())
                     {
-                        Toast.makeText(Registration.this, "Mobile Numbers are Required", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registration.this, "Mobile Number are Required", Toast.LENGTH_SHORT).show();
 
+                    }else if(!MobileNo.matches(MobilePattern)){
+                        Toast.makeText(Registration.this, "Mobile Number is invalid. Try again", Toast.LENGTH_SHORT).show();
                     }
                     else {
 
