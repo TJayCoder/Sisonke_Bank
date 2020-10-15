@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     android:background="@android:color/background_light"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Login">
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome to the Sisonke Bank App"
         android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
@@ -34,6 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20sp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
@@ -46,6 +48,8 @@
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20sp"
+        android:drawableLeft="@drawable/ic_baseline_security_24"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -57,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/drawable_button"
         android:text="Login"
         android:textAlignment="center" />
 

@@ -4,151 +4,170 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_gravity="center"
     android:background="@android:color/background_light"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Registration">
 
 
     <include layout="@layout/appbar" />
 
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="40dp"
-        android:text="Enter your details below to register"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="normal|bold" />
-
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
-        android:paddingTop="20dp" />
-
-    <EditText
-        android:id="@+id/etLastName"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
-        android:paddingTop="20dp" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:paddingTop="20dp" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingTop="20dp" />
-
-    <EditText
-        android:id="@+id/etNumber"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="Mobile"
-        android:inputType="textPersonName"
-        android:paddingTop="20dp" />
-
-
     <LinearLayout
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/radioGroupGender"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="335dp"
+            android:layout_height="67dp"
+            android:gravity="center"
+            android:text="Create Account"
+            android:textAllCaps="true"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp" />
 
-            <TextView
-                android:id="@+id/tvGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:text="Gender"
-                android:textAlignment="center" />
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp" />
 
-            <RadioButton
-                android:id="@+id/radioFemale"
-                android:layout_width="104dp"
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_baseline_security_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingTop="20dp" />
+
+        <EditText
+            android:id="@+id/etNumber"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/phone"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Mobile"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp" />
+
+
+        <LinearLayout
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:textAlignment="center">
+
+            <RadioGroup
+                android:id="@+id/radioGroupGender"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="Female" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioMale"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:text="Male" />
-        </RadioGroup>
+                <TextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="Gender"
+                    android:textAlignment="center" />
 
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="Female" />
+
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="Male" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drawable_button"
+            android:text="Create Account" />
+
+        <TextView
+            android:id="@+id/tvReturnLogin"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="20dp"
+            android:text="Already Have Account? Login Here."
+            android:drawableBottom="@drawable/drawable_button"
+            android:textAlignment="center" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
-        android:text="Create Account" />
-
-    <TextView
-        android:id="@+id/tvReturnLogin"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:paddingTop="20dp"
-        android:text="Already Have Account? Login Here."
-        android:textAlignment="center" />
 </LinearLayout>
